@@ -1,9 +1,10 @@
 class DelugeMeta < Formula
   include Language::Python::Virtualenv
 
+  version "2.0.3"
   desc "Meta package for Deluge 2.0 dependencies"
   homepage "https://deluge-torrent.org/"
-  url "https://files.pythonhosted.org/packages/58/9c/a612e85487c055d88da0f975a81cabf5d04dfb87a2aace2ae5946115113f/deluge-2.0.3.tar.gz"
+  url "https://files.pythonhosted.org/packages/58/9c/a612e85487c055d88da0f975a81cabf5d04dfb87a2aace2ae5946115113f/deluge-#{version}.tar.gz"
   sha256 "bd26950f417de2a5b26827d989935a30e770f880c22cb59ca69f781cdc9a14c9"
   license "GPL-3.0"
 
