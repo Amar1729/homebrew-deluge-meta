@@ -6,7 +6,7 @@ Currently, Deluge 2.0 is in beta, but the newest release of the client available
 
 See the official doc page on installation [here](https://deluge.readthedocs.io/en/latest/intro/01-install.html).
 
-I used [this thread](https://forum.deluge-torrent.org/viewtopic.php?t=55393&start=10) on the deluge forums as a refernce while working on this.
+I used [this thread](https://forum.deluge-torrent.org/viewtopic.php?t=55393&start=10) on the deluge forums as a reference while working on this.
 
 ## How do I install these formulae?
 `brew install amar1729/deluge-meta/<formula>`
