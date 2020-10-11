@@ -150,4 +150,9 @@ class DelugeMeta < Formula
       (bin/cmd).write_env_script(libexec/"bin/#{cmd}", PYTHONPATH: ENV["PYTHONPATH"])
     end
   end
+
+  test do
+    # this is not a "functional" test, but its a little tough to do one for a torrent client
+    assert_match "deluged #{version}", shell_output("#{bin}/deluged --version")
+  end
 end
