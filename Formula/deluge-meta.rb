@@ -7,15 +7,16 @@ class DelugeMeta < Formula
   sha256 "bd26950f417de2a5b26827d989935a30e770f880c22cb59ca69f781cdc9a14c9"
   license "GPL-3.0"
 
-  depends_on "libxcb" => :build
-  depends_on "openjpeg" => :build
-  depends_on "zlib" => :build
   depends_on "adwaita-icon-theme"
   depends_on "gettext"
   depends_on "gtk+3"
   depends_on "libtorrent-rasterbar"
+  depends_on "libxcb"
+  depends_on "little-cms2"
+  depends_on "openjpeg"
   depends_on "pygobject3"
   depends_on "python@3.9"
+  depends_on "zlib"
 
   resource "attrs" do
     url "https://files.pythonhosted.org/packages/81/d0/641b698d05f0eaea4df4f9cebaff573d7a5276228ef6b7541240fe02f3ad/attrs-20.2.0.tar.gz"
