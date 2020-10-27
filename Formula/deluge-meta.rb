@@ -7,6 +7,12 @@ class DelugeMeta < Formula
   sha256 "bd26950f417de2a5b26827d989935a30e770f880c22cb59ca69f781cdc9a14c9"
   license "GPL-3.0"
 
+  bottle do
+    root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.0.3"
+    cellar :any
+    sha256 "1dcced2c512791131b2051bc8902324ad3df6a5fbcacfba4c276fe9ac4e398ca" => :catalina
+  end
+
   depends_on "adwaita-icon-theme"
   depends_on "gettext"
   depends_on "gtk+3"
