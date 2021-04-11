@@ -9,8 +9,7 @@ class DelugeMeta < Formula
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.0.3"
-    cellar :any
-    sha256 "1dcced2c512791131b2051bc8902324ad3df6a5fbcacfba4c276fe9ac4e398ca" => :catalina
+    sha256 cellar: :any, catalina: "1dcced2c512791131b2051bc8902324ad3df6a5fbcacfba4c276fe9ac4e398ca"
   end
 
   depends_on "adwaita-icon-theme"
