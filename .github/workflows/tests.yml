@@ -9,7 +9,7 @@ jobs:
       matrix:
         version: [10.15, 10.14, 10.13]
       fail-fast: false
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.version }}
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
