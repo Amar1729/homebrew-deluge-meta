@@ -6,7 +6,7 @@ class DelugeMeta < Formula
   url "https://files.pythonhosted.org/packages/58/9c/a612e85487c055d88da0f975a81cabf5d04dfb87a2aace2ae5946115113f/deluge-2.0.3.tar.gz"
   sha256 "bd26950f417de2a5b26827d989935a30e770f880c22cb59ca69f781cdc9a14c9"
   license "GPL-3.0"
-  revision 1
+  revision 2
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.0.3_1"
@@ -157,6 +157,8 @@ class DelugeMeta < Formula
     %w[deluge deluge-console deluge-gtk deluge-web deluged].each do |cmd|
       (bin/cmd).write_env_script(libexec/"bin/#{cmd}", PYTHONPATH: ENV["PYTHONPATH"])
     end
+
+    man1.install Dir["docs/man/*.1"]
   end
 
   test do
