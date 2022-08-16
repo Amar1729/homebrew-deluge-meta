@@ -8,8 +8,8 @@ class DelugeMeta < Formula
   license "GPL-3.0"
 
   bottle do
-    root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.0.5"
-    sha256 cellar: :any, big_sur: "ce80f91c2f5aac9c6659b05378a90e33580a16b3091ccd6fc13dddd5cf22da42"
+    root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1"
+    sha256 cellar: :any, big_sur: "c22569c3de3ec0e3446d3ba2c0f1ec41aba56dd23e06750835acc726a608af72"
   end
 
   depends_on "rust" => :build
