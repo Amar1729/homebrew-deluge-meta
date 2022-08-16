@@ -3,8 +3,8 @@ class DelugeMeta < Formula
 
   desc "Meta package for Deluge 2.0 dependencies"
   homepage "https://deluge-torrent.org/"
-  url "https://files.pythonhosted.org/packages/66/08/05f717257157ed313192be15797a302c434ffd941dab8a517805db911545/deluge-2.0.5.tar.gz"
-  sha256 "a00a3920413c6c191e89e0cb22184f05387f5f26062fdb2c3ed8753adede385b"
+  url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
+  sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
   license "GPL-3.0"
 
   bottle do
@@ -42,8 +42,8 @@ class DelugeMeta < Formula
   end
 
   resource "cffi" do
-    url "https://files.pythonhosted.org/packages/00/9e/92de7e1217ccc3d5f352ba21e52398372525765b2e0c4530e6eb2ba9282a/cffi-1.15.0.tar.gz"
-    sha256 "920f0d66a896c2d99f0adbb391f990a84091179542c205fa53ce5787aff87954"
+    url "https://files.pythonhosted.org/packages/2b/a8/050ab4f0c3d4c1b8aaa805f70e26e84d0e27004907c5b8ecc1d31815f92a/cffi-1.15.1.tar.gz"
+    sha256 "d400bfb9a37b1351253cb402671cea7e89bdecc294e8016a707f6d1d8ac934f9"
   end
 
   resource "constantly" do
@@ -52,13 +52,13 @@ class DelugeMeta < Formula
   end
 
   resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/f9/4b/1cf8e281f7ae4046a59e5e39dd7471d46db9f61bb564fddbff9084c4334f/cryptography-36.0.1.tar.gz"
-    sha256 "53e5c1dc3d7a953de055d77bef2ff607ceef7a2aac0353b5d630ab67f7423638"
+    url "https://files.pythonhosted.org/packages/89/d9/5fcd312d5cce0b4d7ee8b551a0ea99e4ea9db0fdbf6dd455a19042e3370b/cryptography-37.0.4.tar.gz"
+    sha256 "63f9c17c0e2474ccbebc9302ce2f07b55b3b3fcb211ded18a42d5764f5c10a82"
   end
 
   resource "deluge" do
-    url "https://files.pythonhosted.org/packages/66/08/05f717257157ed313192be15797a302c434ffd941dab8a517805db911545/deluge-2.0.5.tar.gz"
-    sha256 "a00a3920413c6c191e89e0cb22184f05387f5f26062fdb2c3ed8753adede385b"
+    url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
+    sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
   end
 
   resource "hyperlink" do
@@ -77,13 +77,13 @@ class DelugeMeta < Formula
   end
 
   resource "Mako" do
-    url "https://files.pythonhosted.org/packages/af/b6/42cd322ae555aa770d49e31b8c5c28a243ba1bbb57ad927e1a5f5b064811/Mako-1.1.6.tar.gz"
-    sha256 "4e9e345a41924a954251b95b4b28e14a301145b544901332e658907a7464b6b2"
+    url "https://files.pythonhosted.org/packages/ad/dd/34201dae727bb183ca14fd8417e61f936fa068d6f503991f09ee3cac6697/Mako-1.2.1.tar.gz"
+    sha256 "f054a5ff4743492f1aa9ecc47172cb33b42b9d993cffcc146c9de17e717b0307"
   end
 
   resource "MarkupSafe" do
-    url "https://files.pythonhosted.org/packages/bf/10/ff66fea6d1788c458663a84d88787bae15d45daa16f6b3ef33322a51fc7e/MarkupSafe-2.0.1.tar.gz"
-    sha256 "594c67807fb16238b30c44bdf74f36c02cdf22d1c8cda91ef8a0ed8dabf5620a"
+    url "https://files.pythonhosted.org/packages/1d/97/2288fe498044284f39ab8950703e88abbac2abbdf65524d576157af70556/MarkupSafe-2.1.1.tar.gz"
+    sha256 "7f91197cc9e48f989d12e4e6fbc46495c446636dfc81b9ccf50bb0ec74b91d4b"
   end
 
   resource "pyasn1" do
@@ -107,8 +107,8 @@ class DelugeMeta < Formula
   end
 
   resource "pyxdg" do
-    url "https://files.pythonhosted.org/packages/6f/2e/2251b5ae2f003d865beef79c8fcd517e907ed6a69f58c32403cec3eba9b2/pyxdg-0.27.tar.gz"
-    sha256 "80bd93aae5ed82435f20462ea0208fb198d8eec262e831ee06ce9ddb6b91c5a5"
+    url "https://files.pythonhosted.org/packages/b0/25/7998cd2dec731acbd438fbf91bc619603fc5188de0a9a17699a781840452/pyxdg-0.28.tar.gz"
+    sha256 "3267bb3074e934df202af2ee0868575484108581e6f3cb006af1da35395e88b4"
   end
 
   resource "rencode" do
@@ -127,13 +127,13 @@ class DelugeMeta < Formula
   end
 
   resource "Twisted" do
-    url "https://files.pythonhosted.org/packages/77/b8/8108806ebf2b33654989fd1511281dc94a49fa7e03326d84fe5498ecfae4/Twisted-22.1.0.tar.gz"
-    sha256 "b7971ec9805b0f80e1dcb1a3721d7bfad636d5f909de687430ce373979d67b61"
+    url "https://files.pythonhosted.org/packages/fb/1e/fffa0d45da0ed2998e4d7f121621f2de68c51153fbbab23e63901cf859f4/Twisted-22.4.0.tar.gz"
+    sha256 "a047990f57dfae1e0bd2b7df2526d4f16dcdc843774dc108b78c52f2a5f13680"
   end
 
   resource "typing-extensions" do
-    url "https://files.pythonhosted.org/packages/b1/5a/8b5fbb891ef3f81fc923bf3cb4a578c0abf9471eb50ce0f51c74212182ab/typing_extensions-4.1.1.tar.gz"
-    sha256 "1a9462dcc3347a79b1f1c0271fbe79e844580bb598bafa1ed208b94da3cdcd42"
+    url "https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz"
+    sha256 "e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"
   end
 
   resource "zope.interface" do
