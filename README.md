@@ -9,9 +9,9 @@ See the official doc page on installation [here](https://deluge.readthedocs.io/e
 I used [this thread](https://forum.deluge-torrent.org/viewtopic.php?t=55393&start=10) on the deluge forums as a reference while working on this.
 
 ## How do I install these formulae?
-`brew install amar1729/deluge-meta/<formula>`
+`brew install amar1729/deluge-meta/deluge-meta`
 
-Or `brew tap amar1729/deluge-meta` and then `brew install <formula>`.
+Or `brew tap amar1729/deluge-meta` and then `brew install deluge-meta`.
 
 ## Documentation
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
