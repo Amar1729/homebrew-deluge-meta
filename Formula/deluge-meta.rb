@@ -6,6 +6,7 @@ class DelugeMeta < Formula
   url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
   sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
   license "GPL-3.0"
+  revision 1
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1"
