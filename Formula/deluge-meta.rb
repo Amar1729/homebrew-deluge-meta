@@ -9,7 +9,8 @@ class DelugeMeta < Formula
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1"
-    sha256 cellar: :any, big_sur: "c22569c3de3ec0e3446d3ba2c0f1ec41aba56dd23e06750835acc726a608af72"
+    rebuild 1
+    sha256 cellar: :any, monterey: "0bca5794c44c041c613c99a62cb3ef329dabe0f4a309b21579aa36b45754fc15"
   end
 
   depends_on "rust" => :build
