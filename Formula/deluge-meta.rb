@@ -143,13 +143,21 @@ class DelugeMeta < Formula
   end
 
   def install
-    virtualenv_install_with_resources
+    virtualenv_install_with_resources using: "python@3.11"
 
     %w[deluge deluge-console deluge-gtk deluge-web deluged].each do |cmd|
       (bin/cmd).write_env_script(libexec/"bin/#{cmd}", PYTHONPATH: ENV["PYTHONPATH"])
     end
 
     man1.install Dir["docs/man/*.1"]
+
+    (var/"log/deluge-meta").mkpath
+  end
+
+  service do
+    run [opt_bin/"deluged", "--do-not-daemonize", "--loglevel", "info", "--logfile",
+         var/"log/deluge-meta/deluged.log"]
+    keep_alive true
   end
 
   test do
