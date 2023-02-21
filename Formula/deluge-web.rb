@@ -5,6 +5,11 @@ class DelugeWeb < Formula
   sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
   license "GPL-3.0"
 
+  pour_bottle? do
+    reason "This formula is empty, only for calling deluge-meta's deluge-web script."
+    satisfy { False }
+  end
+
   keg_only "deluge-meta provides the deluge-web executable"
 
   depends_on "deluge-meta"
