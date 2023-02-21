@@ -12,7 +12,7 @@ class DelugeWeb < Formula
 
   keg_only "deluge-meta provides the deluge-web executable"
 
-  depends_on "deluge-meta"
+  depends_on "#{@tap}/adeluge-meta"
 
   def install
     bin.install_symlink "#{Formula["deluge-meta"].opt_bin}/deluge-web"
