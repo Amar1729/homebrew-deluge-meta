@@ -11,6 +11,7 @@ class DelugeMeta < Formula
   depends_on "rust" => :build
   depends_on "adwaita-icon-theme"
   depends_on "cffi"
+  depends_on "cryptography"
   depends_on "gettext"
   depends_on "gtk+3"
   depends_on "libffi"
@@ -20,7 +21,6 @@ class DelugeMeta < Formula
   depends_on "openjpeg"
   depends_on "pycparser"
   depends_on "pygobject3"
-  depends_on "python-cryptography"
   depends_on "python-typing-extensions"
   depends_on "python@3.12"
   depends_on "six"
