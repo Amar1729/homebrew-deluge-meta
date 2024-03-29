@@ -8,6 +8,11 @@ class DelugeMeta < Formula
   license "GPL-3.0"
   revision 3
 
+  bottle do
+    root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1_3"
+    sha256 cellar: :any_skip_relocation, monterey: "14247719efb4e81ca55387075b22d924cd9490f6afa744e4c0e9991497fbbf5e"
+  end
+
   depends_on "rust" => :build
   depends_on "adwaita-icon-theme"
   depends_on "cffi"
