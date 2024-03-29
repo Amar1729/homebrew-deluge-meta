@@ -21,6 +21,7 @@ class DelugeMeta < Formula
   depends_on "openjpeg"
   depends_on "pycparser"
   depends_on "pygobject3"
+  depends_on "python-setuptools"
   depends_on "python-typing-extensions"
   depends_on "python@3.12"
   depends_on "six"
