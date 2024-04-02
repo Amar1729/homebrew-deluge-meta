@@ -1,6 +1,6 @@
 # deluge-meta
 
-This initially started as a "meta-package" for Deluge 2.0 dependencies on MacOS, but turned into a full installation of the `deluge` pip module, including the GUI `deluge-gtk`.
+This initially started as a "meta-package" for Deluge 2.0 dependencies on MacOS, but turned into a full installation of the `deluge` pip module, including the GUI `deluge`/`deluge-gtk`.
 
 Currently, Deluge 2.0 is in beta, but the newest release of the client available for MacOS is 1.x, which is incompatible with 2.0 servers. This tap provides a working (for now?) build for Deluge 2.0 to reduce the troubles with building and linking Deluge's pip module on Mac.
 

@@ -6,7 +6,7 @@ class DelugeMeta < Formula
   url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
   sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
   license "GPL-3.0"
-  revision 3
+  revision 4
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1_3"
@@ -126,7 +126,7 @@ class DelugeMeta < Formula
   def install
     virtualenv_install_with_resources using: "python@3.12"
 
-    %w[deluge deluge-console deluge-web deluged].each do |cmd|
+    %w[deluge deluge-console deluge-gtk deluge-web deluged].each do |cmd|
       (bin/cmd).write_env_script(libexec/"bin/#{cmd}", PYTHONPATH: ENV["PYTHONPATH"])
     end
 
@@ -139,6 +139,16 @@ class DelugeMeta < Formula
     run [opt_bin/"deluged", "--do-not-daemonize", "--loglevel", "info", "--logfile",
          var/"log/deluge-meta/deluged.log"]
     keep_alive true
+  end
+
+  def caveats
+    <<~EOS
+      To successfully launch the GUI (deluge or deluge-gtk) you MUST follow the procedure
+      detailed in https://github.com/Amar1729/homebrew-deluge-meta/issues/23 due to an
+      issue with an underlying dependency.
+
+      If you do not need to GUI, no extra steps are required.
+    EOS
   end
 
   test do
