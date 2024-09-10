@@ -126,6 +126,9 @@ class DelugeMeta < Formula
   def install
     virtualenv_install_with_resources using: "python@3.12"
 
+    # Install typing-extensions via pip
+    system "#{libexec}/bin/python3", "-m", "pip", "install", "typing-extensions"
+
     %w[deluge deluge-console deluge-gtk deluge-web deluged].each do |cmd|
       (bin/cmd).write_env_script(libexec/"bin/#{cmd}", PYTHONPATH: ENV["PYTHONPATH"])
     end
