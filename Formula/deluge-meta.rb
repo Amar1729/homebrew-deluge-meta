@@ -6,7 +6,7 @@ class DelugeMeta < Formula
   url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
   sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
   license "GPL-3.0-only"
-  revision 5
+  revision 6
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1_5"
@@ -174,13 +174,19 @@ class DelugeMeta < Formula
     # this is not a "functional" test, but its a little tough to do one for a torrent client
     assert_match "deluged #{version}", shell_output("#{bin}/deluged --version")
 
-    # TODO: convoluted, cleanup.
     # still not really a functional test, but check that the daemon at least can run.
     pid = fork do
       system bin/"deluged", "-d"
     end
     sleep 1
-    Process.kill "TERM", pid
+    begin
+      # this will hang if deluged is not running.
+      _, err, status = Open3.capture3("#{bin}/deluge-console info")
+      assert_match(/Deferred at 0x.* current result: None/, err)
+      assert_equal 1, status.exitstatus
+    ensure
+      Process.kill "TERM", pid
+    end
 
     # ensure proper libraries are installed for deluge's python
     system "#{libexec}/bin/python", "-c", "import deluge"
