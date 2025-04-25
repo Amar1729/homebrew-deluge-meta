@@ -10,10 +10,10 @@ class DelugeMeta < Formula
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1_5"
-    rebuild 1
-    sha256 cellar: :any,                 arm64_sonoma: "cf8576fced56cb5b61775e27b7ee009f1750d08b8c140871b01786a5c8ec0251"
-    sha256 cellar: :any,                 ventura:      "348d591e5f1f6bddf6301d59a5291cd3ba86a81675796604d8dc6aba02132bb8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "5eb24a7a59e28e8d2856ab88e9f925564c9c40ce45231b7792d254feb69eaf8b"
+    rebuild 2
+    sha256 cellar: :any,                 arm64_sonoma: "41ccaae6938dbd1c00490972a247c49e62a9df7130ec7e6a865061e94d8a4338"
+    sha256 cellar: :any,                 ventura:      "7453af31910f904e4771137835fb84c6919fc0ca43b01ea83597790d24633f3d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "d7f2938115fe764a5ba4287cbfc64af60d063f04c066c53315550010694823db"
   end
 
   depends_on "rust" => :build
