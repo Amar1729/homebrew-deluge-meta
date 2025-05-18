@@ -3,10 +3,9 @@ class DelugeMeta < Formula
 
   desc "Meta package for Deluge 2.0 dependencies"
   homepage "https://deluge-torrent.org/"
-  url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
-  sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
+  url "https://files.pythonhosted.org/packages/d5/d7/b655ee66d208002564c35179b49b0cc9f22916a309785dec2676c85d7c05/deluge-2.2.0.tar.gz"
+  sha256 "f0fc64e052334ef294ca3951975dd926f129d62813f6c909bb523d914abe6537"
   license "GPL-3.0-only"
-  revision 6
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.1.1_6"
@@ -40,12 +39,6 @@ class DelugeMeta < Formula
     sha256 "661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729"
   end
 
-  # manually added since python 3.13 deprecated `cgi` module, but deluge doesn't explicitly depend on it yet
-  resource "legacy-cgi" do
-    url "https://files.pythonhosted.org/packages/a6/ed/300cabc9693209d5a03e2ebc5eb5c4171b51607c08ed84a2b71c9015e0f3/legacy_cgi-2.6.3.tar.gz"
-    sha256 "4c119d6cb8e9d8b6ad7cc0ddad880552c62df4029622835d06dfd18f438a8154"
-  end
-
   resource "attrs" do
     url "https://files.pythonhosted.org/packages/5a/b0/1367933a8532ee6ff8d63537de4f1177af4bff9f3e829baf7331f595bb24/attrs-25.3.0.tar.gz"
     sha256 "75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b"
@@ -67,13 +60,13 @@ class DelugeMeta < Formula
   end
 
   resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/cd/25/4ce80c78963834b8a9fd1cc1266be5ed8d1840785c0f2e1b73b8d128d505/cryptography-44.0.2.tar.gz"
-    sha256 "c63454aa261a0cf0c5b4718349629793e9e634993538db841165b3df74f37ec0"
+    url "https://files.pythonhosted.org/packages/53/d6/1411ab4d6108ab167d06254c5be517681f1e331f90edf1379895bcb87020/cryptography-44.0.3.tar.gz"
+    sha256 "fe19d8bc5536a91a24a8133328880a41831b6c5df54599a8417b62fe015d3053"
   end
 
   resource "deluge" do
-    url "https://files.pythonhosted.org/packages/00/d7/8673068046ded6eaa82caaa2afd6f0751faf591aab5ad150aeafe0d47cb3/deluge-2.1.1.tar.gz"
-    sha256 "d6ea7e1f5bdd75f40cbd1d56f0c97cd1b5b74bc9e03783858c7daa81063dd4b9"
+    url "https://files.pythonhosted.org/packages/d5/d7/b655ee66d208002564c35179b49b0cc9f22916a309785dec2676c85d7c05/deluge-2.2.0.tar.gz"
+    sha256 "f0fc64e052334ef294ca3951975dd926f129d62813f6c909bb523d914abe6537"
   end
 
   resource "hyperlink" do
@@ -170,25 +163,25 @@ class DelugeMeta < Formula
   end
 
   test do
-    # this is not a "functional" test, but its a little tough to do one for a torrent client
     assert_match "deluged #{version}", shell_output("#{bin}/deluged --version")
 
-    # still not really a functional test, but check that the daemon at least can run.
+    # ensure proper libraries are installed for deluge's python
+    system "#{libexec}/bin/python", "-c", "import deluge"
+    system "#{libexec}/bin/python", "-c", "import libtorrent"
+
+    # still not really a functional test, but check that the daemon/console at least can run.
     pid = fork do
       system bin/"deluged", "-d"
     end
     sleep 1
     begin
-      # this will hang if deluged is not running.
-      _, err, status = Open3.capture3("#{bin}/deluge-console info")
-      assert_match(/Deferred at 0x.* current result: None/, err)
-      assert_equal 1, status.exitstatus
-    ensure
+      # 2.2.0: this will output "Could not connect to daemon:" and err traceback if can't connect.
+      assert_match("", shell_output("#{bin}/deluge-console info"))
+      assert_match("Daemon was shutdown", shell_output("#{bin}/deluge-console halt"))
+    rescue
+      # if halting doesn't work, make sure to kill daemon before failing.
       Process.kill "TERM", pid
+      system "false"
     end
-
-    # ensure proper libraries are installed for deluge's python
-    system "#{libexec}/bin/python", "-c", "import deluge"
-    system "#{libexec}/bin/python", "-c", "import libtorrent"
   end
 end
