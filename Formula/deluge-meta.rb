@@ -21,6 +21,7 @@ class DelugeMeta < Formula
   depends_on "cryptography"
   depends_on "gettext"
   depends_on "gtk+3"
+  depends_on "gtk-mac-integration"
   depends_on "libtorrent-rasterbar"
   depends_on "libxcb"
   depends_on "little-cms2"
@@ -155,6 +156,9 @@ class DelugeMeta < Formula
     sha256 "51b10e6e8e238d719636a401f44f1e366146912407b58453936b781a19be19ec"
   end
 
+  # use native file dialog
+  patch :DATA
+
   def install
     virtualenv_install_with_resources using: "python@3.14"
 
@@ -196,3 +200,221 @@ class DelugeMeta < Formula
     end
   end
 end
+
+__END__
+diff --git a/deluge/ui/gtk3/addtorrentdialog.py b/deluge/ui/gtk3/addtorrentdialog.py
+index 7e752bc99..33291428a 100644
+--- a/deluge/ui/gtk3/addtorrentdialog.py
++++ b/deluge/ui/gtk3/addtorrentdialog.py
+@@ -690,21 +690,15 @@ def update_treeview_toggles(self, _iter):
+     def on_button_file_clicked(self, widget):
+         log.debug('on_button_file_clicked')
+         # Setup the filechooserdialog
+-        chooser = Gtk.FileChooserDialog(
+-            _('Choose a .torrent file'),
+-            None,
++        chooser = Gtk.FileChooserNative.new(
++            "Choose a .torrent file'",
++            self.dialog,
+             Gtk.FileChooserAction.OPEN,
+-            buttons=(
+-                _('_Cancel'),
+-                Gtk.ResponseType.CANCEL,
+-                _('_Open'),
+-                Gtk.ResponseType.OK,
+-            ),
+         )
+ 
+         chooser.set_transient_for(self.dialog)
+         chooser.set_select_multiple(True)
+-        chooser.set_property('skip-taskbar-hint', True)
++        # chooser.set_property('skip-taskbar-hint', True)
+         chooser.set_local_only(False)
+ 
+         # Add .torrent and * file filters
+@@ -728,7 +722,7 @@ def on_button_file_clicked(self, widget):
+         # Run the dialog
+         response = chooser.run()
+ 
+-        if response == Gtk.ResponseType.OK:
++        if response == Gtk.ResponseType.ACCEPT:
+             result = [decode_bytes(f) for f in chooser.get_filenames()]
+             self.config['default_load_path'] = decode_bytes(
+                 chooser.get_current_folder()
+diff --git a/deluge/ui/gtk3/createtorrentdialog.py b/deluge/ui/gtk3/createtorrentdialog.py
+index ea578a687..1d3e28940 100644
+--- a/deluge/ui/gtk3/createtorrentdialog.py
++++ b/deluge/ui/gtk3/createtorrentdialog.py
+@@ -121,26 +121,20 @@ def adjust_piece_size(self):
+     def on_button_file_clicked(self, widget):
+         log.debug('on_button_file_clicked')
+         # Setup the filechooserdialog
+-        chooser = Gtk.FileChooserDialog(
+-            _('Choose a file'),
++        chooser = Gtk.FileChooserNative.new(
++            "Choose a file'",
+             self.dialog,
+             Gtk.FileChooserAction.OPEN,
+-            buttons=(
+-                _('_Cancel'),
+-                Gtk.ResponseType.CANCEL,
+-                _('_Open'),
+-                Gtk.ResponseType.OK,
+-            ),
+         )
+ 
+         chooser.set_transient_for(self.dialog)
+         chooser.set_select_multiple(False)
+-        chooser.set_property('skip-taskbar-hint', True)
++        # chooser.set_property('skip-taskbar-hint', True)
+ 
+         # Run the dialog
+         response = chooser.run()
+ 
+-        if response == Gtk.ResponseType.OK:
++        if response == Gtk.ResponseType.ACCEPT:
+             result = chooser.get_filename()
+         else:
+             chooser.destroy()
+@@ -157,26 +151,19 @@ def on_button_file_clicked(self, widget):
+ 
+     def on_button_folder_clicked(self, widget):
+         log.debug('on_button_folder_clicked')
+-        # Setup the filechooserdialog
+-        chooser = Gtk.FileChooserDialog(
+-            _('Choose a folder'),
++        chooser = Gtk.FileChooserNative.new(
++            "Choose a folder",
+             self.dialog,
+             Gtk.FileChooserAction.SELECT_FOLDER,
+-            buttons=(
+-                _('_Cancel'),
+-                Gtk.ResponseType.CANCEL,
+-                _('_Open'),
+-                Gtk.ResponseType.OK,
+-            ),
+         )
+ 
+         chooser.set_transient_for(self.dialog)
+         chooser.set_select_multiple(False)
+-        chooser.set_property('skip-taskbar-hint', True)
++        # chooser.set_property('skip-taskbar-hint', True)
+         # Run the dialog
+         response = chooser.run()
+ 
+-        if response == Gtk.ResponseType.OK:
++        if response == Gtk.ResponseType.ACCEPT:
+             result = chooser.get_filename()
+         else:
+             chooser.destroy()
+@@ -247,21 +234,15 @@ def on_button_save_clicked(self, widget):
+             dialog.hide()
+         else:
+             # Setup the filechooserdialog
+-            chooser = Gtk.FileChooserDialog(
+-                _('Save .torrent file'),
++            chooser = Gtk.FileChooserNative.new(
++                "Save .torrent file'",
+                 self.dialog,
+                 Gtk.FileChooserAction.SAVE,
+-                buttons=(
+-                    _('_Cancel'),
+-                    Gtk.ResponseType.CANCEL,
+-                    _('_Save'),
+-                    Gtk.ResponseType.OK,
+-                ),
+             )
+ 
+             chooser.set_transient_for(self.dialog)
+             chooser.set_select_multiple(False)
+-            chooser.set_property('skip-taskbar-hint', True)
++            # chooser.set_property('skip-taskbar-hint', True)
+ 
+             # Add .torrent and * file filters
+             file_filter = Gtk.FileFilter()
+@@ -277,7 +258,7 @@ def on_button_save_clicked(self, widget):
+             # Run the dialog
+             response = chooser.run()
+ 
+-            if response == Gtk.ResponseType.OK:
++            if response == Gtk.ResponseType.ACCEPT:
+                 result = chooser.get_filename()
+             else:
+                 chooser.destroy()
+diff --git a/deluge/ui/gtk3/gtkui.py b/deluge/ui/gtk3/gtkui.py
+index a0c5d8942..0bfa88f30 100644
+--- a/deluge/ui/gtk3/gtkui.py
++++ b/deluge/ui/gtk3/gtkui.py
+@@ -157,14 +157,32 @@ def on_die(*args):
+             log.debug('Win32 "die" handler registered')
+         elif osx_check() and windowing('quartz'):
+             try:
+-                import gtkosx_application
++                gi.require_version('GtkosxApplication', '1.0')
++                from gi.repository import GtkosxApplication
+             except ImportError:
+                 pass
+             else:
+-                self.osxapp = gtkosx_application.gtkosx_application_get()
++                self.osxapp = GtkosxApplication.Application()
+                 self.osxapp.connect('NSApplicationWillTerminate', on_die)
+                 log.debug('OSX quartz "die" handler registered')
+ 
++                # Workaround: weird font rendering
++                from gi.repository.Gdk import Screen
++                from gi.repository.Gtk import (
++                    STYLE_PROVIDER_PRIORITY_APPLICATION,
++                    CssProvider,
++                    StyleContext,
++                )
++                fontcss = b""" * { font-family: "" } """
++                fontcssprovider = CssProvider()
++                fontcssprovider.load_from_data(fontcss)
++
++                StyleContext.add_provider_for_screen(
++                    Screen.get_default(),
++                    fontcssprovider,
++                    STYLE_PROVIDER_PRIORITY_APPLICATION,
++                )
++
+         # Set process name again to fix gtk issue
+         setproctitle(getproctitle())
+ 
+diff --git a/deluge/ui/gtk3/preferences.py b/deluge/ui/gtk3/preferences.py
+index 59b22264b..8f1729c3b 100644
+--- a/deluge/ui/gtk3/preferences.py
++++ b/deluge/ui/gtk3/preferences.py
+@@ -1169,21 +1169,15 @@ def on_plugin_selection_changed(self, treeselection):
+ 
+     def on_button_plugin_install_clicked(self, widget):
+         log.debug('on_button_plugin_install_clicked')
+-        chooser = Gtk.FileChooserDialog(
+-            _('Select the Plugin'),
++        chooser = Gtk.Gtk.FileChooserNative.new(
++            "Select the Plugin",
+             self.pref_dialog,
+             Gtk.FileChooserAction.OPEN,
+-            buttons=(
+-                _('_Cancel'),
+-                Gtk.ResponseType.CANCEL,
+-                _('_Open'),
+-                Gtk.ResponseType.OK,
+-            ),
+         )
+ 
+         chooser.set_transient_for(self.pref_dialog)
+         chooser.set_select_multiple(False)
+-        chooser.set_property('skip-taskbar-hint', True)
++        # chooser.set_property('skip-taskbar-hint', True)
+ 
+         file_filter = Gtk.FileFilter()
+         file_filter.set_name(_('Plugin Eggs'))
+@@ -1193,7 +1187,7 @@ def on_button_plugin_install_clicked(self, widget):
+         # Run the dialog
+         response = chooser.run()
+ 
+-        if response == Gtk.ResponseType.OK:
++        if response == Gtk.ResponseType.ACCEPT:
+             filepath = deluge.common.decode_bytes(chooser.get_filename())
+         else:
+             chooser.destroy()
