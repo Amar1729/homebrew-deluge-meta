@@ -6,7 +6,7 @@ class DelugeMeta < Formula
   url "https://files.pythonhosted.org/packages/d5/d7/b655ee66d208002564c35179b49b0cc9f22916a309785dec2676c85d7c05/deluge-2.2.0.tar.gz"
   sha256 "f0fc64e052334ef294ca3951975dd926f129d62813f6c909bb523d914abe6537"
   license "GPL-3.0-only"
-  revision 2
+  revision 3
 
   bottle do
     root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.2.0_2"
@@ -25,9 +25,9 @@ class DelugeMeta < Formula
   depends_on "libxcb"
   depends_on "little-cms2"
   depends_on "openjpeg"
+  depends_on "openssl@3"
   depends_on "pycparser"
   depends_on "pygobject3"
-  depends_on "python-setuptools"
   depends_on "python@3.14"
 
   uses_from_macos "libffi"
@@ -35,8 +35,8 @@ class DelugeMeta < Formula
 
   # manually added since Automat requires wheel (cmd bdist_wheel) to build
   resource "wheel" do
-    url "https://files.pythonhosted.org/packages/8a/98/2d9906746cdc6a6ef809ae6338005b3f21bb568bea3165cfc6a243fdc25c/wheel-0.45.1.tar.gz"
-    sha256 "661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729"
+    url "https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz"
+    sha256 "e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803"
   end
 
   # manually added since homebrew-core deprecated python-specific packages like six
@@ -50,7 +50,7 @@ class DelugeMeta < Formula
     sha256 "16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11"
   end
 
-  resource "Automat" do
+  resource "automat" do
     url "https://files.pythonhosted.org/packages/e3/0f/d40bbe294bbf004d436a8bcbcfaadca8b5140d39ad0ad3d73d1a8ba15f14/automat-25.4.16.tar.gz"
     sha256 "0017591a5477066e90d26b0e696ddc143baafd87b588cfac8100bc6be9634de0"
   end
@@ -66,13 +66,8 @@ class DelugeMeta < Formula
   end
 
   resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/9f/33/c00162f49c0e2fe8064a62cb92b93e50c74a72bc370ab92f86112b33ff62/cryptography-46.0.3.tar.gz"
-    sha256 "a8b17438104fed022ce745b362294d9ce35b4c2e45c1d958ad4a4b019285f4a1"
-  end
-
-  resource "deluge" do
-    url "https://files.pythonhosted.org/packages/d5/d7/b655ee66d208002564c35179b49b0cc9f22916a309785dec2676c85d7c05/deluge-2.2.0.tar.gz"
-    sha256 "f0fc64e052334ef294ca3951975dd926f129d62813f6c909bb523d914abe6537"
+    url "https://files.pythonhosted.org/packages/60/04/ee2a9e8542e4fa2773b81771ff8349ff19cdd56b7258a0cc442639052edb/cryptography-46.0.5.tar.gz"
+    sha256 "abace499247268e3757271b2f1e244b36b06f8515cf27c4d49468fc9eb16e93d"
   end
 
   resource "hyperlink" do
@@ -85,29 +80,29 @@ class DelugeMeta < Formula
     sha256 "795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902"
   end
 
-  resource "Incremental" do
+  resource "incremental" do
     url "https://files.pythonhosted.org/packages/ef/3c/82e84109e02c492f382c711c58a3dd91badda6d746def81a1465f74dc9f5/incremental-24.11.0.tar.gz"
     sha256 "87d3480dbb083c1d736222511a8cf380012a8176c2456d01ef483242abbbcf8c"
   end
 
-  resource "Mako" do
+  resource "mako" do
     url "https://files.pythonhosted.org/packages/9e/38/bd5b78a920a64d708fe6bc8e0a2c075e1389d53bef8413725c63ba041535/mako-1.3.10.tar.gz"
     sha256 "99579a6f39583fa7e5630a28c3c1f440e4e97a414b80372649c0ce338da2ea28"
   end
 
-  resource "MarkupSafe" do
+  resource "markupsafe" do
     url "https://files.pythonhosted.org/packages/7e/99/7690b6d4034fffd95959cbe0c02de8deb3098cc577c67bb6a24fe5d7caa7/markupsafe-3.0.3.tar.gz"
     sha256 "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698"
   end
 
   resource "packaging" do
-    url "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz"
-    sha256 "d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"
+    url "https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz"
+    sha256 "00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4"
   end
 
   resource "pyasn1" do
-    url "https://files.pythonhosted.org/packages/ba/e9/01f1a64245b89f039897cb0130016d79f77d52669aae6ee7b159a6c4c018/pyasn1-0.6.1.tar.gz"
-    sha256 "6f580d2bdd84365380830acf45550f2511469f673cb4a5ae3857a3170128b034"
+    url "https://files.pythonhosted.org/packages/fe/b6/6e630dff89739fcd427e3f72b3d905ce0acb85a45d4ec3e2678718a3487f/pyasn1-0.6.2.tar.gz"
+    sha256 "9b59a2b25ba7e4f8197db7686c09fb33e658b98339fadb826e9512629017833b"
   end
 
   resource "pyasn1-modules" do
@@ -116,11 +111,11 @@ class DelugeMeta < Formula
   end
 
   resource "pycparser" do
-    url "https://files.pythonhosted.org/packages/fe/cf/d2d3b9f5699fb1e4615c8e32ff220203e43b248e1dfcc6736ad9057731ca/pycparser-2.23.tar.gz"
-    sha256 "78816d4f24add8f10a06d6f05b4d424ad9e96cfebf68a4ddc99c65c0720d00c2"
+    url "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz"
+    sha256 "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29"
   end
 
-  resource "pyOpenSSL" do
+  resource "pyopenssl" do
     url "https://files.pythonhosted.org/packages/80/be/97b83a464498a79103036bc74d1038df4a7ef0e402cfaf4d5e113fb14759/pyopenssl-25.3.0.tar.gz"
     sha256 "c981cb0a3fd84e8602d7afc209522773b94c1c2446a3c710a75b06fe1beae329"
   end
@@ -140,7 +135,12 @@ class DelugeMeta < Formula
     sha256 "b8683ba13f0d39c6cd5d625d2c5f65421d6d707b013b375c355751557cbe8e09"
   end
 
-  resource "Twisted" do
+  resource "setuptools" do
+    url "https://files.pythonhosted.org/packages/76/95/faf61eb8363f26aa7e1d762267a8d602a1b26d4f3a1e758e92cb3cb8b054/setuptools-80.10.2.tar.gz"
+    sha256 "8b0e9d10c784bf7d262c4e5ec5d4ec94127ce206e8738f29a437945fbc219b70"
+  end
+
+  resource "twisted" do
     url "https://files.pythonhosted.org/packages/13/0f/82716ed849bf7ea4984c21385597c949944f0f9b428b5710f79d0afc084d/twisted-25.5.0.tar.gz"
     sha256 "1deb272358cb6be1e3e8fc6f9c8b36f78eb0fa7c2233d2dbe11ec6fee04ea316"
   end
@@ -151,8 +151,8 @@ class DelugeMeta < Formula
   end
 
   resource "zope-interface" do
-    url "https://files.pythonhosted.org/packages/71/c9/5ec8679a04d37c797d343f650c51ad67d178f0001c363e44b6ac5f97a9da/zope_interface-8.1.1.tar.gz"
-    sha256 "51b10e6e8e238d719636a401f44f1e366146912407b58453936b781a19be19ec"
+    url "https://files.pythonhosted.org/packages/86/a4/77daa5ba398996d16bb43fc721599d27d03eae68fe3c799de1963c72e228/zope_interface-8.2.tar.gz"
+    sha256 "afb20c371a601d261b4f6edb53c3c418c249db1a9717b0baafc9a9bb39ba1224"
   end
 
   # use native file dialog
@@ -160,10 +160,6 @@ class DelugeMeta < Formula
 
   def install
     virtualenv_install_with_resources using: "python@3.14"
-
-    %w[deluge deluge-console deluge-gtk deluge-web deluged].each do |cmd|
-      (bin/cmd).write_env_script(libexec/"bin/#{cmd}", PYTHONPATH: ENV["PYTHONPATH"])
-    end
 
     man1.install Dir["docs/man/*.1"]
 
