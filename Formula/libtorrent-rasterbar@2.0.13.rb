@@ -11,14 +11,14 @@ class LibtorrentRasterbarAT2013 < Formula
     regex(/^v?(\d+(?:[._]\d+)+)$/i)
   end
 
+  keg_only :versioned_formula
+
   depends_on "cmake" => :build
   depends_on "python-setuptools" => :build
   depends_on "boost"
   depends_on "boost-python3"
   depends_on "openssl@3"
   depends_on "python@3.14"
-
-  conflicts_with "libtorrent-rakshasa", because: "both use the same libname"
 
   def install
     # Work around Homebrew's prefix scheme, which makes Python's reported
