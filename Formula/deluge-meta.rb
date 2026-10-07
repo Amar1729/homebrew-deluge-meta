@@ -8,12 +8,6 @@ class DelugeMeta < Formula
   license "GPL-3.0-only"
   revision 4
 
-  bottle do
-    root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.2.0_3"
-    sha256 cellar: :any, arm64_sequoia: "202179744dfa8cd34e9e480278ac08961ebe1656a27cc6bf8b7dc91e5a16852a"
-    sha256 cellar: :any, arm64_sonoma:  "fc871db945e4a85e65075eb0bd432e77937fc0b182b7e8056a77c3a5b41fc55b"
-  end
-
   depends_on "rust" => :build
   depends_on "adwaita-icon-theme"
   depends_on "amar1729/deluge-meta/libtorrent-rasterbar@2.0.13"
