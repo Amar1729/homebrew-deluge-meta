@@ -6,22 +6,16 @@ class DelugeMeta < Formula
   url "https://files.pythonhosted.org/packages/d5/d7/b655ee66d208002564c35179b49b0cc9f22916a309785dec2676c85d7c05/deluge-2.2.0.tar.gz"
   sha256 "f0fc64e052334ef294ca3951975dd926f129d62813f6c909bb523d914abe6537"
   license "GPL-3.0-only"
-  revision 3
-
-  bottle do
-    root_url "https://github.com/Amar1729/homebrew-deluge-meta/releases/download/deluge-meta-2.2.0_3"
-    sha256 cellar: :any, arm64_sequoia: "202179744dfa8cd34e9e480278ac08961ebe1656a27cc6bf8b7dc91e5a16852a"
-    sha256 cellar: :any, arm64_sonoma:  "fc871db945e4a85e65075eb0bd432e77937fc0b182b7e8056a77c3a5b41fc55b"
-  end
+  revision 4
 
   depends_on "rust" => :build
   depends_on "adwaita-icon-theme"
+  depends_on "amar1729/deluge-meta/libtorrent-rasterbar@2.0.13"
   depends_on "cffi"
   depends_on "cryptography"
   depends_on "gettext"
   depends_on "gtk+3"
   depends_on "gtk-mac-integration"
-  depends_on "libtorrent-rasterbar"
   depends_on "libxcb"
   depends_on "little-cms2"
   depends_on "openjpeg"
@@ -160,6 +154,11 @@ class DelugeMeta < Formula
 
   def install
     virtualenv_install_with_resources using: "python@3.14"
+
+    # ensure GSETTINGS_SCHEMA_DIR is properly determined
+    rm bin/"deluge-gtk"
+    (bin/"deluge-gtk").write_env_script libexec/"bin/deluge-gtk",
+      GSETTINGS_SCHEMA_DIR: HOMEBREW_PREFIX/"share/glib-2.0/schemas"
 
     man1.install Dir["docs/man/*.1"]
 
