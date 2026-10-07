@@ -14,11 +14,17 @@ class LibtorrentRasterbarAT2013 < Formula
   keg_only :versioned_formula
 
   depends_on "cmake" => :build
+  depends_on "gcc" => :build
   depends_on "python-setuptools" => :build
   depends_on "boost"
   depends_on "boost-python3"
   depends_on "openssl@3"
   depends_on "python@3.14"
+
+  fails_with :clang do
+    build 1700
+    cause "requires libatomic, from clang >= 21.0.0"
+  end
 
   def install
     # Work around Homebrew's prefix scheme, which makes Python's reported
